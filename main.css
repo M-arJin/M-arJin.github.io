@@ -1,3 +1,11 @@
-body {
-    background-color: yellow;
+#header {
+    border: solid black 2px;
+    height: 20vh;
+    background-color: grey;
+}
+
+#main {
+    background-color: orange;
+    border: solid black 2px;
+    height: 80vh;
 }
