@@ -1,0 +1,33 @@
+.square {
+    height: 100px;
+    width: 100px;
+    border: solid black 2px;
+    margin: 5px;
+}
+
+#gameScreen {
+    height: 600px;
+    width: 600px;
+    border: solid black 4px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#resetButton {
+    width: 100px;
+    height: 60px;
+}
+
+#betButton {
+    width: 100px;
+    height: 60px;
+}
+
+#cashoutButton {
+    width: 100px;
+    height: 60px;
+}
