@@ -1,11 +1,11 @@
 #header {
     border: solid black 2px;
-    height: 20vh;
+    height: 300px;
     background-color: grey;
 }
 
 #main {
     background-color: orange;
     border: solid black 2px;
-    height: 80vh;
+    height: 800px;
 }
