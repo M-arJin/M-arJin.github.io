@@ -2,7 +2,7 @@ screen = document.getElementById("Screen")
 let amountOfBombs = 3
 let playerMoney = 100
 let possibleWinnings = 0 
-
+let hasbeenClicked = []
 run()
 
 function run() {
@@ -63,7 +63,6 @@ function clicked(obj) {
         //Sets the square to red to show the user they've lost
         obj.style.backgroundColor = "red"
         gameScreen.style.pointerEvents = "none"
-        obj.disabled = true
 
         //Creates a reset button to allow the user to reset the game so they can try again
         resetDiv = document.getElementById("Reset")
@@ -80,8 +79,12 @@ function clicked(obj) {
     } else {
         //If the square is not a bomb it will make it green and increase the possibleWinnings
         obj.style.backgroundColor = "#51E885"
-        possibleWinnings = possibleWinnings * (1 + (0.025 * amountOfBombs))
-        potentialWinnings()
+        console.log(hasbeenClicked.indexOf(obj.id))
+        if (hasbeenClicked.indexOf(obj.id) < 0) {
+            possibleWinnings = possibleWinnings * (1 + (0.025 * amountOfBombs))
+            potentialWinnings()
+            hasbeenClicked.push(obj.id)
+        } 
     }
 }
 
@@ -97,7 +100,7 @@ function reset() {
     possibleWinnings = 0
     potentialWinnings()
     createGameBoard()
-
+    hasbeenClicked = []
     mines = createMines(amountOfBombs)
     console.log(mines)
 }
