@@ -63,6 +63,7 @@ function clicked(obj) {
         //Sets the square to red to show the user they've lost
         obj.style.backgroundColor = "red"
         gameScreen.style.pointerEvents = "none"
+        obj.disabled = true
 
         //Creates a reset button to allow the user to reset the game so they can try again
         resetDiv = document.getElementById("Reset")
