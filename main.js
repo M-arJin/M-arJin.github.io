@@ -12,6 +12,7 @@ function run() {
     createGameBoard()
     mines = createMines(amountOfBombs)
     console.log(mines)
+    gameScreen.style.pointerEvents = "none"
 }
 
 //Draws up the gameboard
@@ -61,7 +62,14 @@ function clicked(obj) {
         cashingout.disabled = true
         console.log("bomb")
         //Sets the square to red to show the user they've lost
-        obj.style.backgroundColor = "red"
+
+        charcoal = document.createElement("IMG")
+        charcoal.setAttribute("src", "charcoal.webp")
+        charcoal.setAttribute("width", "70")
+        charcoal.setAttribute("height", "70")
+        obj.appendChild(charcoal)
+
+        obj.style.backgroundColor = "#E20016"
         gameScreen.style.pointerEvents = "none"
 
         //Creates a reset button to allow the user to reset the game so they can try again
@@ -79,6 +87,11 @@ function clicked(obj) {
     } else {
         //If the square is not a bomb it will make it green and increase the possibleWinnings
         obj.style.backgroundColor = "#51E885"
+        emerald_icon = document.createElement("IMG")
+        emerald_icon.setAttribute("src", "emerald.webp")
+        emerald_icon.setAttribute("width", "70")
+        emerald_icon.setAttribute("height", "70")
+        obj.appendChild(emerald_icon)
         console.log(hasbeenClicked.indexOf(obj.id))
         if (hasbeenClicked.indexOf(obj.id) < 0) {
             possibleWinnings = possibleWinnings * (1 + (0.025 * amountOfBombs))
@@ -96,7 +109,6 @@ function reset() {
     console.log(gameScreen)
     gameScreen.innerHTML = ""
     resetDiv.innerHTML = ""
-    gameScreen.style.pointerEvents = "auto"
     possibleWinnings = 0
     potentialWinnings()
     createGameBoard()
@@ -161,7 +173,7 @@ function potentialWinnings() {
 function bet() {
     playerMoney = playerMoney - 20
     possibleWinnings = possibleWinnings + 20
-
+    gameScreen.style.pointerEvents = "auto"
     potentialWinnings()
     updatePlayer()
     console.log("BETTING")
