@@ -63,11 +63,6 @@ function clicked(obj) {
         console.log("bomb")
         //Sets the square to red to show the user they've lost
 
-        charcoal = document.createElement("IMG")
-        charcoal.setAttribute("src", "charcoal.webp")
-        charcoal.setAttribute("width", "70")
-        charcoal.setAttribute("height", "70")
-        obj.appendChild(charcoal)
 
         obj.style.backgroundColor = "#E20016"
         gameScreen.style.pointerEvents = "none"
@@ -79,6 +74,27 @@ function clicked(obj) {
         resetButton.innerHTML = "RESET"
         resetButton.id = "resetButton"
         resetDiv.appendChild(resetButton)
+        gameScreen = document.getElementById("gameScreen")
+
+        squares = gameScreen.querySelectorAll('.square')
+        console.log(squares)
+
+        squares.forEach((square) => {
+            if (mines.indexOf(parseInt(square.id)) >= 0) {
+                console.log(square.id)
+                charcoal = document.createElement("IMG")
+                charcoal.setAttribute("src", "charcoal.webp")
+                charcoal.setAttribute("width", "70")
+                charcoal.setAttribute("height", "70")
+                square.appendChild(charcoal)
+                square.style.backgroundColor = "#E20016"
+            }
+            
+        });
+            
+        
+
+
 
         //Triggers when reset button is clicked
         resetButton.addEventListener("click", function() {
@@ -93,6 +109,7 @@ function clicked(obj) {
         emerald_icon.setAttribute("height", "70")
         obj.appendChild(emerald_icon)
         console.log(hasbeenClicked.indexOf(obj.id))
+        obj.style.pointerEvents = "none"
         if (hasbeenClicked.indexOf(obj.id) < 0) {
             possibleWinnings = possibleWinnings * (1 + (0.025 * amountOfBombs))
             potentialWinnings()
