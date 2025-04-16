@@ -5,6 +5,7 @@ let possibleWinnings = 0
 let originalBet = 0
 let hasbeenClicked = []
 let multiplier = (1 + (0.025 * amountOfBombs))
+let gameCount = 0 
 run()
 
 function run() {
@@ -101,7 +102,7 @@ function clicked(obj) {
 
         //Triggers when reset button is clicked
         resetButton.addEventListener("click", function() {
-            reset()
+            reset(0)
         })
     } else {
         //If the square is not a bomb it will make it green and increase the possibleWinnings
@@ -122,23 +123,57 @@ function clicked(obj) {
 }
 
 //Resets the gameboard for the next round
-function reset() {
+function reset(condition) {
     console.log("REESAESRTITNG")
     cashingout = document.getElementById("cashoutButton")
     gameScreen = document.getElementById("gameScreen")
     resetDiv = document.getElementById("Reset")
+    historyHolder = document.getElementById("history")
+
+    if (gameCount == 4) {
+        historyHolder.innerHTML = ""
+        gameCount = 0
+    }
+
+
+
+    
+    historyDiv = document.createElement("div")
+    historyDiv.classList.add("historyDiv")
+    historyMultiplier = document.createElement("h2")
+    historyMultiplier.innerHTML = (possibleWinnings / originalBet).toFixed(2) + "x"
+    historyWinnings = document.createElement("h3")
+    historyWinnings.innerHTML = "$"+possibleWinnings.toFixed(2)
+
+    if (condition == 1) {
+        historyWinnings.style.color = "#51E885"
+    } else {
+        historyWinnings.style.color = "#E20016"
+    }
+
+    
+
+
+    historyDiv.appendChild(historyMultiplier)
+    historyDiv.appendChild(historyWinnings)
+    historyHolder.appendChild(historyDiv)
+
+
     console.log(gameScreen)
     gameScreen.innerHTML = ""
     resetDiv.innerHTML = ""
     possibleWinnings = 0
     originalBet = 0
     potentialWinnings()
+    cashoutButton.disabled = false
     createGameBoard()
     hasbeenClicked = []
     mines = createMines(amountOfBombs)
     gameScreen.style.pointerEvents = "none"
     cashingout.disabled = true
     console.log(mines)
+    gameCount = gameCount + 1
+    cashoutButton.disabled = true
 }
 
 //Updates the player div at the top i.e. players money and the bet button
@@ -200,6 +235,7 @@ function bet() {
     possibleWinnings = originalBet
     gameScreen.style.pointerEvents = "auto"
     potentialWinnings()
+    cashoutButton.disabled = false
     updatePlayer()
     console.log("BETTING")
 }
@@ -227,6 +263,6 @@ function cashout() {
     }
     
 
-    reset()
+    reset(1)
 }
 
