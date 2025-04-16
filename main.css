@@ -11,6 +11,42 @@ body {
     transition: background-color 0.5s ease;
 }
 
+#multi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    z-index: 10; /* Ensure it's above other elements */
+    position: absolute; /* Position absolutely within its relative container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Precise centering */
+    width: 220px; /* Slightly wider */
+    height: 150px; /* Slightly taller */
+    background-color: rgba(0, 0, 0, 0.85); /* Darker, semi-transparent background */
+    border-radius: 10px; /* More rounded corners */
+    border: 1px solid #444; /* Subtle border */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Refined shadow */
+    padding: 10px; /* Add some padding */
+}
+
+#multi h1 {
+    margin: 0 0 10px 0; /* Reduced top margin, added bottom margin */
+    font-size: 2.5em; /* Larger font size for multiplier */
+    color: #fff; /* White text */
+    font-weight: bold; /* Make the multiplier bold */
+    letter-spacing: 2px; /* Add a little letter spacing */
+}
+
+#multi h2 {
+    margin: 0; /* Remove default heading margin */
+    font-size: 1.5em; /* larger font size for money won */
+    color: #00e676; /* Green color for the money won */
+    font-weight: normal;
+}
+
+
 #Screen {
     background-color: #1f1f1f;
     padding: 30px;

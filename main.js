@@ -2,7 +2,9 @@ screen = document.getElementById("Screen")
 let amountOfBombs = 3
 let playerMoney = 100
 let possibleWinnings = 0 
+let originalBet = 0
 let hasbeenClicked = []
+let multiplier = (1 + (0.025 * amountOfBombs))
 run()
 
 function run() {
@@ -54,11 +56,12 @@ function createMines(amountOfBombs) {
 //Triggers when an object is clicked on
 function clicked(obj) {
     betting = document.getElementById("betButton")
+    cashingout = document.getElementById("cashoutButton")
     //Disables the player from betting further after starting to play
     betting.disabled = true
+    cashingout.disabled = false
     //Checks to see if the square the player has clicked on is a mine or not
     if (mines.indexOf(parseInt(obj.id)) >=0) {
-        cashingout = document.getElementById("cashoutButton")
         cashingout.disabled = true
         console.log("bomb")
         //Sets the square to red to show the user they've lost
@@ -111,7 +114,7 @@ function clicked(obj) {
         console.log(hasbeenClicked.indexOf(obj.id))
         obj.style.pointerEvents = "none"
         if (hasbeenClicked.indexOf(obj.id) < 0) {
-            possibleWinnings = possibleWinnings * (1 + (0.025 * amountOfBombs))
+            possibleWinnings = possibleWinnings * multiplier
             potentialWinnings()
             hasbeenClicked.push(obj.id)
         } 
@@ -121,16 +124,20 @@ function clicked(obj) {
 //Resets the gameboard for the next round
 function reset() {
     console.log("REESAESRTITNG")
+    cashingout = document.getElementById("cashoutButton")
     gameScreen = document.getElementById("gameScreen")
     resetDiv = document.getElementById("Reset")
     console.log(gameScreen)
     gameScreen.innerHTML = ""
     resetDiv.innerHTML = ""
     possibleWinnings = 0
+    originalBet = 0
     potentialWinnings()
     createGameBoard()
     hasbeenClicked = []
     mines = createMines(amountOfBombs)
+    gameScreen.style.pointerEvents = "none"
+    cashingout.disabled = true
     console.log(mines)
 }
 
@@ -179,7 +186,7 @@ function potentialWinnings() {
     cashoutButton.id = "cashoutButton"
     cashoutDiv.appendChild(cashoutButton)
     winningsDiv.appendChild(cashoutDiv)
-    
+
     //Trigger for cashout button
     cashoutButton.addEventListener("click", function() {
         cashout()
@@ -189,7 +196,8 @@ function potentialWinnings() {
 //Bet function, allows the user to bet on the game in increments of 20
 function bet() {
     playerMoney = playerMoney - 20
-    possibleWinnings = possibleWinnings + 20
+    originalBet = originalBet + 20
+    possibleWinnings = originalBet
     gameScreen.style.pointerEvents = "auto"
     potentialWinnings()
     updatePlayer()
@@ -200,6 +208,26 @@ function bet() {
 function cashout() {
     console.log("CASHING OUT")
     playerMoney = playerMoney + possibleWinnings
+
+    multi = document.getElementById("multi")
+    multi.innerHTML = ""
+    multi.style.visibility = "visible"
+    console.log(multi)
+    multiplierDisplay = document.createElement("h1")
+    multiplierDisplay.innerHTML = (possibleWinnings / originalBet).toFixed(2) + "x"
+    multi.appendChild(multiplierDisplay)
+    moneywonDisplay = document.createElement("h2")
+    moneywonDisplay.innerHTML = "$"+possibleWinnings.toFixed(2)
+    multi.appendChild(moneywonDisplay)
+
+    setTimeout(clearMulti, 2000)
+
+    function clearMulti() {
+        console.log("MNIGGER")
+        multi.style.visibility = "hidden"
+    }
+    
+
     reset()
 }
 
