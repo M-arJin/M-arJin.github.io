@@ -223,7 +223,6 @@ function cashout() {
     setTimeout(clearMulti, 2000)
 
     function clearMulti() {
-        console.log("MNIGGER")
         multi.style.visibility = "hidden"
     }
     
