@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+
+/* Hero Animated Background */
+.bg-container {
+    position: absolute; /* Changed to absolute so it scrolls away */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #0a1114 0%, #000 100%);
+}
+
+.blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, rgba(46, 96, 107, 0.4) 0%, rgba(17, 36, 40, 0.2) 100%);
+    filter: blur(100px);
+    border-radius: 50%;
+    animation: move 15s infinite alternate ease-in-out;
+}
+
+.blob-1 { top: -10%; left: -10%; }
+.blob-2 { bottom: 10%; right: -10%; animation-delay: -5s; }
+
+@keyframes move {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 80px) scale(1.1); }
+    100% { transform: translate(-20px, 40px) scale(0.9); }
+}
+
+/* Navigation Glass */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Projects Section with Grid Pattern */
+.projects-section {
+    background-color: #050505;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; /* Adjust grid size here */
+}
+
+/* Project Cards */
+.project-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: rgba(6, 182, 212, 0.5); /* Cyan border on hover */
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-5px);
+}
+
+/* Tags in cards */
+.tag {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #9ca3af;
+}
+
+
+/* Fixed Sidebar Positioning */
+.fixed-sidebar {
+    position: fixed; /* Locked sidebar */
+    bottom: 160px;
+    left: 40px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.social-icon:hover {
+    transition-delay: 0ms !important; /* This kills the reveal delay for hover */
+    border-color: rgba(6, 182, 212, 0.5);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    color: #06b6d4;
+    background: rgba(6, 182, 212, 0.05);
+    transform: translateY(-3px);
+}
+
+/* Vertical line below icons */
+.sidebar-line {
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Dark Skill Card Styling */
+.skill-card-dark {
+    transition: all 0.3s ease;
+}
+
+.skill-card-dark:hover {
+    transform: translateY(-5px);
+    background: #141c2e; /* Slightly lighter on hover */
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* The Dark Background Track */
+.skill-bar-dark {
+    width: 100%;
+    height: 6px;
+    background: #1f2937; /* Dark gray/blue track */
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* The Cyan-to-Purple Gradient Bar */
+.skill-progress-gradient {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(to right, #2dd4bf 0%, #06b6d4 50%, #055fa8 100%);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+}
+
+/* Initial entrance state */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    /* This handles the entrance speed */
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out; 
+}
+
+/* When the intersection observer adds .active */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* The Fix: Reset the delay for hover so it's instant */
+.project-card:hover, .skill-card-dark:hover {
+    transition-delay: 0ms !important;
+    /* Ensure other hover transitions are snappy */
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Styling for the new image icon */
+.edu-logo {
+    width: 46px;   /* Adjust this based on how big you want the logo */
+    height: 46px;
+    object-fit: contain; /* Prevents the image from stretching */
+    display: block;
+}
+
+/* Optional: If your logo is very bright, you can add a slight dim 
+   to match the dark theme until hovered */
+.edu-card .edu-logo {
+    filter: grayscale(20%) brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.edu-card:hover .edu-logo {
+    filter: grayscale(0%) brightness(1.1);
+}
+
+/* --- Custom Scrollbar Styling --- */
+
+/* For Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+    width: 8px; /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #050505; /* Matches your body background */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1f2937; /* Dark gray for the handle */
+    border-radius: 10px;
+    border: 2px solid #050505; /* Adds 'padding' around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4; /* Glows Cyan on hover to match your theme */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1f2937 #050505; /* thumb track */
+}
