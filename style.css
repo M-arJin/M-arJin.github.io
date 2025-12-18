@@ -253,3 +253,12 @@ header * {
     /* 3. The actual movement */
     transform: translateY(-8px) scale(1.02) !important;
 }
+
+.tag {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #9ca3af;
+}
