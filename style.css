@@ -171,7 +171,7 @@ header * {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: linear-gradient(135deg, rgba(46, 96, 107, 0.4) 0%, rgba(17, 36, 40, 0.2) 100%);
+    background: linear-gradient(135deg, #1a434d66 0%, #1c98b169 100%);
     filter: blur(100px);
     border-radius: 50%;
     animation: move 15s infinite alternate ease-in-out;
