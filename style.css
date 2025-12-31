@@ -1,3 +1,4 @@
+/* --- FOUNDATIONS --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 html {
@@ -12,10 +13,9 @@ body {
     overflow-x: hidden;
 }
 
-/* --- FIXED SYSTEM (Locked to screen) --- */
-
+/* --- BACKGROUND SYSTEM (Locked to screen) --- */
 .bg-container {
-    position: fixed; /* Locked background */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -26,31 +26,23 @@ body {
     perspective: 1000px;
 }
 
-header {
-    position: fixed; /* Locked header */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    pointer-events: none;
+.blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, #1a434d66 0%, #1c98b169 100%);
+    filter: blur(100px);
+    border-radius: 50%;
+    animation: move 15s infinite alternate ease-in-out;
 }
 
-header * {
-    pointer-events: auto;
+@keyframes move {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 80px) scale(1.1); }
+    100% { transform: translate(-20px, 40px) scale(0.9); }
 }
 
-.fixed-sidebar {
-    position: fixed; /* Locked sidebar */
-    bottom: 160px;
-    left: 40px;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* --- STAR SYSTEM --- */
-
+/* --- GALAXY & STAR SYSTEM --- */
 .galaxy-rotation-wrapper {
     position: absolute;
     width: 200vw;
@@ -87,12 +79,34 @@ header * {
     to { transform: rotate(360deg); }
 }
 
-/* --- UI ELEMENTS --- */
+/* --- UI NAVIGATION & SIDEBAR --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+header * {
+    pointer-events: auto;
+}
 
 .glass-nav {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+}
+
+.fixed-sidebar {
+    position: fixed;
+    bottom: 160px;
+    left: 40px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .social-icon {
@@ -105,17 +119,9 @@ header * {
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #9ca3af;
     background: rgba(255, 255, 255, 0.02);
-    transition: all 0.3s ease;
     margin-bottom: 1.5rem;
-}
-
-.social-icon:hover {
-    transition-delay: 0ms !important; /* This kills the reveal delay for hover */
-    border-color: rgba(6, 182, 212, 0.5);
-    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-    color: #06b6d4;
-    background: rgba(6, 182, 212, 0.05);
-    transform: translateY(-3px);
+    /* Independent hover transition */
+    transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
 }
 
 .sidebar-line {
@@ -124,134 +130,13 @@ header * {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* --- TIMELINE & CARDS --- */
-
-.timeline-line {
-    position: relative;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.timeline-dot {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    top: 1.5rem;
-    z-index: 2;
-}
-
-.dot-cyan { background: #06b6d4; box-shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
-.dot-gray { background: rgba(255, 255, 255, 0.2); }
-
+/* --- PROJECT CARDS --- */
 .project-card {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-/* --- Project Card Hover Fix --- */
-
-
-
-/* --- ANIMATIONS --- */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.blob {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: linear-gradient(135deg, #1a434d66 0%, #1c98b169 100%);
-    filter: blur(100px);
-    border-radius: 50%;
-    animation: move 15s infinite alternate ease-in-out;
-}
-
-@keyframes move {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(50px, 80px) scale(1.1); }
-    100% { transform: translate(-20px, 40px) scale(0.9); }
-}
-
-/* --- SCROLLBAR --- */
-
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb {
-    background: #1f2937;
-    border-radius: 10px;
-    border: 2px solid #050505;
-}
-::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
-
-
-
-/* Dark Skill Card Styling */
-.skill-card-dark {
-    transition: all 0.3s ease;
-}
-
-.skill-card-dark:hover {
-
-    transition-delay: 0ms !important; /* This kills the reveal delay for hover */
-    border-color: rgba(6, 182, 212, 0.5);
-    transform: translateY(-5px);
-    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-    background: #141c2e; /* Slightly lighter on hover */
-    
-}
-
-/* The Dark Background Track */
-.skill-bar-dark {
-    width: 100%;
-    height: 6px;
-    background: #1f2937; /* Dark gray/blue track */
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-/* The Cyan-to-Purple Gradient Bar */
-.skill-progress-gradient {
-    height: 100%;
-    border-radius: 20px;
-    background: linear-gradient(to right, #2dd4bf 0%, #06b6d4 50%, #055fa8 100%);
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
-}
-
-#skills {
-    background-color: rgba(10, 10, 10, 0.3); /* 0.6 is the opacity level */
-    backdrop-filter: blur(2px); /* Optional: adds a glass effect */
-    position: relative;
-    z-index: 1;
-}
-
-
-/* Master Fix for Hover Delay */
-.project-card:hover, 
-.skill-card-dark:hover,
-.social-icon:hover {
-    /* 1. Kill all delays instantly */
-    transition-delay: 0ms !important;
-    animation-delay: 0ms !important;
-
-    /* 2. Force a fast transition specifically for hover properties */
-    transition: transform 0.2s ease-out, 
-                background 0.2s ease-out, 
-                border-color 0.2s ease-out, 
-                box-shadow 0.2s ease-out !important;
-
-    /* 3. The actual movement */
-    transform: translateY(-8px) scale(1.02) !important;
+    /* Transition specifically for hover properties */
+    transition: transform 0.2s ease-out, background 0.2s ease-out, border-color 0.2s ease-out !important;
 }
 
 .tag {
@@ -262,3 +147,71 @@ header * {
     border-radius: 12px;
     color: #9ca3af;
 }
+
+/* --- SKILLS SECTION --- */
+#skills {
+    background-color: rgba(10, 10, 10, 0.3);
+    backdrop-filter: blur(2px);
+    position: relative;
+    z-index: 1;
+}
+
+.skill-card-dark {
+    transition: transform 0.2s ease-out, background 0.2s ease-out, border-color 0.2s ease-out !important;
+}
+
+.skill-bar-dark {
+    width: 100%;
+    height: 6px;
+    background: #1f2937;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.skill-progress-gradient {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(to right, #2dd4bf 0%, #06b6d4 50%, #055fa8 100%);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+    /* Slower bar filling animation */
+    transition: width 1.5s cubic-bezier(0.1, 0.5, 0.2, 1);
+}
+
+/* --- THE REVEAL SYSTEM (Entrance Animation) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    /* Limit transition to only transform/opacity to avoid lagging hover effects */
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none; /* Avoid hovering items before they appear */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* --- THE MASTER HOVER FIX --- */
+/* This kills the entrance delay and speeds up interaction the moment the mouse enters */
+.project-card:hover, 
+.skill-card-dark:hover,
+.social-icon:hover {
+    transition-delay: 0ms !important;
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(6, 182, 212, 0.5) !important;
+    background: rgba(6, 182, 212, 0.05) !important;
+    color: #06b6d4;
+    z-index: 10;
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 10px;
+    border: 2px solid #050505;
+}
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
