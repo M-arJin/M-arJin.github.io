@@ -215,3 +215,9 @@ header * {
     border: 2px solid #050505;
 }
 ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+
+/* Add this to the end of style.css */
+.project-card div {
+    transition: background-color 0.2s ease;
+}
