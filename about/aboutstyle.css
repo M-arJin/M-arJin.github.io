@@ -216,3 +216,32 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #1f2937 #050505; /* thumb track */
 }
+
+/* --- THE MASTER HOVER FIX --- */
+/* This kills the entrance delay and speeds up interaction the moment the mouse enters */
+.project-card:hover, 
+.skill-card-dark:hover,
+.social-icon:hover {
+    transition-delay: 0ms !important;
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(6, 182, 212, 0.5) !important;
+    background: rgba(6, 182, 212, 0.05) !important;
+    color: #06b6d4;
+    z-index: 10;
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 10px;
+    border: 2px solid #050505;
+}
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+
+/* Add this to the end of style.css */
+.project-card div {
+    transition: background-color 0.2s ease;
+}
